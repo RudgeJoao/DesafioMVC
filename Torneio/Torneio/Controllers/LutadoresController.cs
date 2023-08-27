@@ -10,32 +10,32 @@ using Torneio.Models;
 
 namespace Torneio.Controllers
 {
-    public class LutadorController : Controller
+    public class LutadoresController : Controller
     {
         private readonly OracleDbContext _context;
 
-        public LutadorController(OracleDbContext context)
+        public LutadoresController(OracleDbContext context)
         {
             _context = context;
         }
 
-        // GET: Lutador
+        // GET: Lutadores
         public async Task<IActionResult> Index()
         {
-              return _context.Lutador != null ? 
-                          View(await _context.Lutador.ToListAsync()) :
+              return _context.Lutadores != null ? 
+                          View(await _context.Lutadores.ToListAsync()) :
                           Problem("Entity set 'OracleDbContext.Lutador'  is null.");
         }
 
-        // GET: Lutador/Details/5
+        // GET: Lutadores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Lutador == null)
+            if (id == null || _context.Lutadores == null)
             {
                 return NotFound();
             }
 
-            var lutador = await _context.Lutador
+            var lutador = await _context.Lutadores
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lutador == null)
             {
@@ -45,13 +45,13 @@ namespace Torneio.Controllers
             return View(lutador);
         }
 
-        // GET: Lutador/Create
+        // GET: Lutadores/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Lutador/Create
+        // POST: Lutadores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,15 +67,15 @@ namespace Torneio.Controllers
             return View(lutador);
         }
 
-        // GET: Lutador/Edit/5
+        // GET: Lutadores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Lutador == null)
+            if (id == null || _context.Lutadores == null)
             {
                 return NotFound();
             }
 
-            var lutador = await _context.Lutador.FindAsync(id);
+            var lutador = await _context.Lutadores.FindAsync(id);
             if (lutador == null)
             {
                 return NotFound();
@@ -83,7 +83,7 @@ namespace Torneio.Controllers
             return View(lutador);
         }
 
-        // POST: Lutador/Edit/5
+        // POST: Lutadores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -118,15 +118,15 @@ namespace Torneio.Controllers
             return View(lutador);
         }
 
-        // GET: Lutador/Delete/5
+        // GET: Lutadores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Lutador == null)
+            if (id == null || _context.Lutadores == null)
             {
                 return NotFound();
             }
 
-            var lutador = await _context.Lutador
+            var lutador = await _context.Lutadores
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lutador == null)
             {
@@ -136,19 +136,19 @@ namespace Torneio.Controllers
             return View(lutador);
         }
 
-        // POST: Lutador/Delete/5
+        // POST: Lutadores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Lutador == null)
+            if (_context.Lutadores == null)
             {
                 return Problem("Entity set 'OracleDbContext.Lutador'  is null.");
             }
-            var lutador = await _context.Lutador.FindAsync(id);
+            var lutador = await _context.Lutadores.FindAsync(id);
             if (lutador != null)
             {
-                _context.Lutador.Remove(lutador);
+                _context.Lutadores.Remove(lutador);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace Torneio.Controllers
 
         private bool LutadorExists(int id)
         {
-          return (_context.Lutador?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Lutadores?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
