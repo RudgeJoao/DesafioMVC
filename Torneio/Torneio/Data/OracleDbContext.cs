@@ -11,6 +11,7 @@ namespace Torneio.Data
         }
 
         public DbSet<Lutador> Lutadores { get; set; } = default!;
+        public DbSet<ResultadoTorneio> ResultadoTorneios { get; set; } = default!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(NecessityMap).Assembly);
