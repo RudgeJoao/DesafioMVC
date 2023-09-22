@@ -1,20 +1,20 @@
 ﻿using Torneio.Data;
 using Torneio.Models;
+using Torneio.Repositories;
 
 namespace Torneio.Services
 {
     public class TorneioService : ITorneioService
     {
-        private readonly OracleDbContext _dbContext;
+        private readonly ITorneioRepository? _torneioRepository;
 
-        public TorneioService(OracleDbContext dbContext)
+        public TorneioService(ITorneioRepository torneioRepository)
         {
-            _dbContext = dbContext;
+            _torneioRepository = torneioRepository;
         }
-
-        public List<Lutador> ListarLutadores() 
+        public async Task<List<Lutador>> ListarLutadoresAsync() 
         {
-            return _dbContext.Lutadores.ToList();
+            return await _torneioRepository.ListarLutadoresAsync();
         }
     }
 
