@@ -22,9 +22,9 @@ namespace Torneio.Controllers
         // GET: Lutadores
         public async Task<IActionResult> Index()
         {
-              return _context.Lutadores != null ? 
-                          View(await _context.Lutadores.ToListAsync()) :
-                          Problem("Entity set 'OracleDbContext.Lutador'  is null.");
+            var query = await _context.Lutadores.ToListAsync();
+
+            return View(query);
         }
 
         // GET: Lutadores/Details/5
