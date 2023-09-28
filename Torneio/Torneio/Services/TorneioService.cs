@@ -1,4 +1,5 @@
-﻿using Torneio.Data;
+﻿using Torneio.Controllers;
+using Torneio.Data;
 using Torneio.Models;
 using Torneio.Repositories;
 
@@ -6,7 +7,7 @@ namespace Torneio.Services
 {
     public class TorneioService : ITorneioService
     {
-        private readonly ITorneioRepository? _torneioRepository;
+        private readonly ITorneioRepository _torneioRepository;
 
         public TorneioService(ITorneioRepository torneioRepository)
         {
@@ -16,7 +17,10 @@ namespace Torneio.Services
         {
             return await _torneioRepository.ListarLutadoresAsync();
         }
+
+        public async Task<Lutador> GetLutadorAsync(int? id) 
+        {
+            return await _torneioRepository.GetLutadorAsync(id);
+        }
     }
-
-
 }

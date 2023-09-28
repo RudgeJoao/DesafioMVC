@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using Torneio.Data;
 using Torneio.Models;
 
@@ -13,14 +13,20 @@ namespace Torneio.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Lutador>> ListarLutadoresAsync(bool tracking = true)
+        public async Task<List<Lutador>> ListarLutadoresAsync()
         {
-            var query = _dbContext.Lutadores.AsQueryable();
+            var query = await _dbContext.Lutadores.ToListAsync();
+            return query;
 
-            if (!tracking)
-                query = query.AsNoTracking();
-
-            return await query.ToListAsync();
         }
+
+        public async Task<Lutador> GetLutadorAsync(int? id)
+        {
+           var query = await _dbContext.Lutadores.FirstOrDefaultAsync(x => x.Id == id);
+
+            return query;
+
+        }
+
     }
 }
