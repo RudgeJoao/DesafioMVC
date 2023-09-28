@@ -6,7 +6,7 @@ namespace Torneio.Services
 {
     public class TorneioService : ITorneioService
     {
-        private readonly ITorneioRepository? _torneioRepository;
+        private readonly ITorneioRepository _torneioRepository;
 
         public TorneioService(ITorneioRepository torneioRepository)
         {
