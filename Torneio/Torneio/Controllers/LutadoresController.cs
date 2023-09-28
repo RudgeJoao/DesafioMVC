@@ -25,24 +25,15 @@ namespace Torneio.Controllers
         // GET: Lutadores
         public async Task<IActionResult> Index()
         {
-            var query = await _torneioService.ListarLutadoresAsync();
-
+            var query = await _torneioService.GetLutadoresAsync();
             return View(query);
         }
 
         // GET: Lutadores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            //if (id == null || _context.Lutadores == null)
-            //{
-            //    return NotFound();
-            //}
 
             var lutador = await _torneioService.GetLutadorAsync(id);
-            //if (lutador == null)
-            //{
-            //    return NotFound();
-            //}
 
             return View(lutador);
         }
@@ -152,14 +143,14 @@ namespace Torneio.Controllers
             {
                 _context.Lutadores.Remove(lutador);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LutadorExists(int id)
         {
-          return (_context.Lutadores?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Lutadores?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

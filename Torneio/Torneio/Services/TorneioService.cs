@@ -13,14 +13,30 @@ namespace Torneio.Services
         {
             _torneioRepository = torneioRepository;
         }
-        public async Task<List<Lutador>> ListarLutadoresAsync() 
+        public async Task<List<Lutador>> GetLutadoresAsync() 
         {
             return await _torneioRepository.ListarLutadoresAsync();
         }
 
         public async Task<Lutador> GetLutadorAsync(int? id) 
         {
-            return await _torneioRepository.GetLutadorAsync(id);
+            if (id == null || _torneioRepository.GetLutadorAsync(id) == null)
+            {
+                return NotFound();
+            }
+
+            var lutador = await _torneioRepository.GetLutadorAsync(id);
+
+            if (lutador is null)
+            {
+                return NotFound();            
+            }
+            return lutador;
+        }
+
+        private Lutador NotFound()
+        {
+            throw new NotImplementedException();
         }
     }
 }
