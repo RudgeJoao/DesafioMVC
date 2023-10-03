@@ -4,6 +4,16 @@ namespace Torneio.Services
 {
     public interface ITorneioService
     {
-        Task<List<Lutador>> ListarLutadoresAsync();
+        Task<List<Lutador>> GetLutadoresAsync();
+
+        Task<Lutador> GetLutadorAsync(int? id);
+        Task CreateLutador(Lutador lutador);
+
+        Task UpdateLutador(int id, Lutador lutador);
+
+        Task DeleteLutador(int id);
+
+        bool LutadorExists(int id);
+
     }
 }

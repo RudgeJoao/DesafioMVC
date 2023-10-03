@@ -4,6 +4,16 @@ namespace Torneio.Repositories
 {
     public interface ITorneioRepository
     {
-        Task<List<Lutador>> ListarLutadoresAsync(bool tracking = true);
+        Task<List<Lutador>> ListarLutadoresAsync();
+
+        Task<Lutador> GetLutadorAsync(int? id);
+
+        Task CreateLutador(Lutador lutador);
+
+        Task UpdateLutador(int id, Lutador lutador);
+
+        Task DeleteLutador(int id);
+
+        bool LutadorExists(int id);
     }
 }
