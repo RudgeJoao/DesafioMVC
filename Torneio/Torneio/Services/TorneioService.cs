@@ -13,23 +13,23 @@ namespace Torneio.Services
         {
             _torneioRepository = torneioRepository;
         }
-        public async Task<List<Lutador>> GetLutadoresAsync() 
+        public async Task<List<Lutador>> GetLutadoresAsync()
         {
             return await _torneioRepository.ListarLutadoresAsync();
         }
 
-        public async Task<Lutador> GetLutadorAsync(int? id) 
+        public async Task<Lutador> GetLutadorAsync(int? id)
         {
+            var lutador = await _torneioRepository.GetLutadorAsync(id);
+
             if (id == null || _torneioRepository.GetLutadorAsync(id) == null)
             {
                 return NotFound();
             }
 
-            var lutador = await _torneioRepository.GetLutadorAsync(id);
-
             if (lutador is null)
             {
-                return NotFound();            
+                return NotFound();
             }
             return lutador;
         }
@@ -38,5 +38,27 @@ namespace Torneio.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task CreateLutador(Lutador lutador)
+        {
+            _torneioRepository.CreateLutador(lutador);
+        }
+
+        public async Task UpdateLutador(int id, Lutador lutador)
+        {
+            _torneioRepository.UpdateLutador(id, lutador);
+        }
+
+        public async Task DeleteLutador(int id)
+        { 
+            _torneioRepository.DeleteLutador(id);
+        }
+        public bool LutadorExists(int id)
+        { 
+            bool existe = _torneioRepository.LutadorExists(id);
+
+            return existe;
+        }
+
     }
 }
