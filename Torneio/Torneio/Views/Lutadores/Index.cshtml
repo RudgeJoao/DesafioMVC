@@ -3,13 +3,16 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/Torneio.styles.css" asp-append-version="true" />
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" type="button" class="btn btn-primary">Create New Lutador</a>
 </p>
-<table class="table">
+<table class="table table-sm">
     <thead>
         <tr>
             <th>
@@ -55,9 +58,9 @@
                 @Html.DisplayFor(modelItem => item.Vitorias)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-secondary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" type="button" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }
