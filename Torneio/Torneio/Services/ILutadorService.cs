@@ -2,7 +2,7 @@
 
 namespace Torneio.Services
 {
-    public interface ITorneioService
+    public interface ILutadorService
     {
         Task<List<Lutador>> GetLutadoresAsync();
 

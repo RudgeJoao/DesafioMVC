@@ -2,7 +2,7 @@
 
 namespace Torneio.Repositories
 {
-    public interface ITorneioRepository
+    public interface ILutadorRepository
     {
         Task<List<Lutador>> ListarLutadoresAsync();
 
