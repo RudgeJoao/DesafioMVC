@@ -5,11 +5,11 @@ using Torneio.Models;
 
 namespace Torneio.Repositories
 {
-    public class TorneioRepository : ITorneioRepository
+    public class LutadorRepository : ILutadorRepository
     {
         private readonly OracleDbContext _dbContext;
 
-        public TorneioRepository(OracleDbContext dbContext)
+        public LutadorRepository(OracleDbContext dbContext)
         {
             _dbContext = dbContext;
         }

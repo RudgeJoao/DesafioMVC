@@ -5,24 +5,24 @@ using Torneio.Repositories;
 
 namespace Torneio.Services
 {
-    public class TorneioService : ITorneioService
+    public class LutadorService : ILutadorService
     {
-        private readonly ITorneioRepository _torneioRepository;
+        private readonly ILutadorRepository _lutadorRepository;
 
-        public TorneioService(ITorneioRepository torneioRepository)
+        public LutadorService(ILutadorRepository lutadorRepository)
         {
-            _torneioRepository = torneioRepository;
+            _lutadorRepository = lutadorRepository;
         }
         public async Task<List<Lutador>> GetLutadoresAsync()
         {
-            return await _torneioRepository.ListarLutadoresAsync();
+            return await _lutadorRepository.ListarLutadoresAsync();
         }
 
         public async Task<Lutador> GetLutadorAsync(int? id)
         {
-            var lutador = await _torneioRepository.GetLutadorAsync(id);
+            var lutador = await _lutadorRepository.GetLutadorAsync(id);
 
-            if (id == null || _torneioRepository.GetLutadorAsync(id) == null)
+            if (id == null || _lutadorRepository.GetLutadorAsync(id) == null)
             {
                 return NotFound();
             }
@@ -41,21 +41,21 @@ namespace Torneio.Services
 
         public async Task CreateLutador(Lutador lutador)
         {
-            _torneioRepository.CreateLutador(lutador);
+            _lutadorRepository.CreateLutador(lutador);
         }
 
         public async Task UpdateLutador(int id, Lutador lutador)
         {
-            _torneioRepository.UpdateLutador(id, lutador);
+            _lutadorRepository.UpdateLutador(id, lutador);
         }
 
         public async Task DeleteLutador(int id)
         { 
-            _torneioRepository.DeleteLutador(id);
+            _lutadorRepository.DeleteLutador(id);
         }
         public bool LutadorExists(int id)
         { 
-            bool existe = _torneioRepository.LutadorExists(id);
+            bool existe = _lutadorRepository.LutadorExists(id);
 
             return existe;
         }

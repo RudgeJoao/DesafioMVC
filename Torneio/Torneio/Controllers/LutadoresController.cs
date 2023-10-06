@@ -13,17 +13,17 @@ namespace Torneio.Controllers
 {
     public class LutadoresController : Controller
     {
-        private readonly ITorneioService _torneioService;
+        private readonly ILutadorService _lutadorService;
 
-        public LutadoresController(ITorneioService torneioService)
+        public LutadoresController(ILutadorService lutadorService)
         {
-            _torneioService = torneioService;
+            _lutadorService = lutadorService;
         }
 
         // GET: Lutadores
         public async Task<IActionResult> Index()
         {
-            var query = await _torneioService.GetLutadoresAsync();
+            var query = await _lutadorService.GetLutadoresAsync();
             return View(query);
         }
 
@@ -31,7 +31,7 @@ namespace Torneio.Controllers
         public async Task<IActionResult> Details(int? id)
         {
 
-            var lutador = await _torneioService.GetLutadorAsync(id);
+            var lutador = await _lutadorService.GetLutadorAsync(id);
 
             return View(lutador);
         }
@@ -51,7 +51,7 @@ namespace Torneio.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _torneioService.CreateLutador(lutador);
+                await _lutadorService.CreateLutador(lutador);
                 return RedirectToAction(nameof(Index));
             }
             return View(lutador);
@@ -60,12 +60,12 @@ namespace Torneio.Controllers
         // GET: Lutadores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _torneioService.GetLutadoresAsync() == null)
+            if (id == null || _lutadorService.GetLutadoresAsync() == null)
             {
                 return NotFound();
             }
 
-            var lutador = await _torneioService.GetLutadorAsync(id);
+            var lutador = await _lutadorService.GetLutadorAsync(id);
             if (lutador == null)
             {
                 return NotFound();
@@ -89,7 +89,7 @@ namespace Torneio.Controllers
             {
                 try
                 {
-                    _torneioService.UpdateLutador(id, lutador);
+                    _lutadorService.UpdateLutador(id, lutador);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,7 +115,7 @@ namespace Torneio.Controllers
                 return NotFound();
             }
 
-            var lutador = await _torneioService.GetLutadorAsync(id);
+            var lutador = await _lutadorService.GetLutadorAsync(id);
             if (lutador == null)
             {
                 return NotFound();
@@ -129,18 +129,18 @@ namespace Torneio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_torneioService.GetLutadoresAsync() == null)
+            if (_lutadorService.GetLutadoresAsync() == null)
             {
                 return Problem("Entity set 'OracleDbContext.Lutador'  is null.");
             }
             
-            _torneioService.DeleteLutador(id);
+            _lutadorService.DeleteLutador(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool LutadorExists(int id)
         {
-            bool existe = _torneioService.LutadorExists(id);
+            bool existe = _lutadorService.LutadorExists(id);
 
             return existe;
         }
