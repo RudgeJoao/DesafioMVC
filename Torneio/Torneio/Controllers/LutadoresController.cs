@@ -7,40 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Torneio.Data;
 using Torneio.Models;
+using Torneio.Services;
 
 namespace Torneio.Controllers
 {
     public class LutadoresController : Controller
     {
-        private readonly OracleDbContext _context;
+        private readonly ILutadorService _lutadorService;
 
-        public LutadoresController(OracleDbContext context)
+        public LutadoresController(ILutadorService lutadorService)
         {
-            _context = context;
+            _lutadorService = lutadorService;
         }
 
         // GET: Lutadores
         public async Task<IActionResult> Index()
         {
-              return _context.Lutadores != null ? 
-                          View(await _context.Lutadores.ToListAsync()) :
-                          Problem("Entity set 'OracleDbContext.Lutador'  is null.");
+            var query = await _lutadorService.GetLutadoresAsync();
+            return View(query);
         }
 
         // GET: Lutadores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Lutadores == null)
-            {
-                return NotFound();
-            }
 
-            var lutador = await _context.Lutadores
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (lutador == null)
-            {
-                return NotFound();
-            }
+            var lutador = await _lutadorService.GetLutadorAsync(id);
 
             return View(lutador);
         }
@@ -56,12 +47,11 @@ namespace Torneio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,ArtesMarciais,TotalLutas,Derrotas,Vitorias")] Lutador lutador)
+        public async Task<IActionResult> Create(Lutador lutador)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(lutador);
-                await _context.SaveChangesAsync();
+                await _lutadorService.CreateLutador(lutador);
                 return RedirectToAction(nameof(Index));
             }
             return View(lutador);
@@ -70,12 +60,12 @@ namespace Torneio.Controllers
         // GET: Lutadores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Lutadores == null)
+            if (id == null || _lutadorService.GetLutadoresAsync() == null)
             {
                 return NotFound();
             }
 
-            var lutador = await _context.Lutadores.FindAsync(id);
+            var lutador = await _lutadorService.GetLutadorAsync(id);
             if (lutador == null)
             {
                 return NotFound();
@@ -88,7 +78,7 @@ namespace Torneio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,ArtesMarciais,TotalLutas,Derrotas,Vitorias")] Lutador lutador)
+        public async Task<IActionResult> Edit(int id,Lutador lutador)
         {
             if (id != lutador.Id)
             {
@@ -99,8 +89,7 @@ namespace Torneio.Controllers
             {
                 try
                 {
-                    _context.Update(lutador);
-                    await _context.SaveChangesAsync();
+                    _lutadorService.UpdateLutador(id, lutador);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,13 +110,12 @@ namespace Torneio.Controllers
         // GET: Lutadores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Lutadores == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var lutador = await _context.Lutadores
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var lutador = await _lutadorService.GetLutadorAsync(id);
             if (lutador == null)
             {
                 return NotFound();
@@ -141,23 +129,20 @@ namespace Torneio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Lutadores == null)
+            if (_lutadorService.GetLutadoresAsync() == null)
             {
                 return Problem("Entity set 'OracleDbContext.Lutador'  is null.");
             }
-            var lutador = await _context.Lutadores.FindAsync(id);
-            if (lutador != null)
-            {
-                _context.Lutadores.Remove(lutador);
-            }
             
-            await _context.SaveChangesAsync();
+            _lutadorService.DeleteLutador(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool LutadorExists(int id)
         {
-          return (_context.Lutadores?.Any(e => e.Id == id)).GetValueOrDefault();
+            bool existe = _lutadorService.LutadorExists(id);
+
+            return existe;
         }
     }
 }

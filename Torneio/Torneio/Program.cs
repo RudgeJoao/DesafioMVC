@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Torneio.Data;
+using Torneio.Repositories;
+using Torneio.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 IWebHostEnvironment env = builder.Environment;
@@ -19,6 +21,9 @@ builder.Services.AddDbContext<DbContext, OracleDbContext>(opt =>
     opt.LogTo(message => Debug.WriteLine(message));
 
 });
+
+builder.Services.AddScoped<ILutadorRepository, LutadorRepository>();
+builder.Services.AddScoped<ILutadorService, LutadorService>();
 
 var app = builder.Build();
 
