@@ -17,7 +17,7 @@ namespace Torneio.Services
             var lutadoresPorIdade = lutadores.OrderBy(x => x.Idade).ToList();
             var vencedoresOitavas = new List<Lutador>();
 
-            if (lutadores.Count < 16)
+            if (lutadores.Count < 16 || lutadores.Count > 16)
             {
                 throw new InvalidOperationException("Não há lutadores suficientes para realizar as oitavas de final.");
             }
@@ -26,14 +26,17 @@ namespace Torneio.Services
             {
                 var lutadorMaisJovem = lutadoresPorIdade[i * 2];
                 var segundoLutadorMaisJovem = lutadoresPorIdade[i * 2 + 1];
-                Lutador vencedor = null;
+                Lutador? vencedor = null;
+                double porcentagemLutadorJovem = ((double)lutadorMaisJovem.Vitorias / lutadorMaisJovem.TotalLutas) * 100;
+                double porcentagemLutadorVelho = ((double)segundoLutadorMaisJovem.Vitorias/segundoLutadorMaisJovem.TotalLutas) * 100;
 
-                if (lutadorMaisJovem.Vitorias / lutadorMaisJovem.TotalLutas * 100 > segundoLutadorMaisJovem.Vitorias / segundoLutadorMaisJovem.TotalLutas * 100)
+
+                if (porcentagemLutadorJovem > porcentagemLutadorVelho)
                 {
                     vencedor = lutadorMaisJovem;
                 }
 
-                else if (lutadorMaisJovem.Vitorias / lutadorMaisJovem.TotalLutas * 100 < segundoLutadorMaisJovem.Vitorias / segundoLutadorMaisJovem.TotalLutas * 100)
+                else if (porcentagemLutadorVelho > porcentagemLutadorJovem)
                 {
                     vencedor = segundoLutadorMaisJovem;
                 }
@@ -45,5 +48,10 @@ namespace Torneio.Services
             return  vencedoresOitavas;
         }
 
+
+        public async Task<List<Lutador>> QuartasDeFinal()
+        {
+            return null;
+        }
     }
 }
