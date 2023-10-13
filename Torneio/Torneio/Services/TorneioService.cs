@@ -121,5 +121,45 @@ namespace Torneio.Services
 
             return vencedoresQuartas;
         }
+
+        public async Task<List<Lutador>> SemiFinal()
+        {
+            var lutadores = await QuartasDeFinal();
+            var lutadoresPorIdade = lutadores.OrderBy(x => x.Idade).ToList();
+            var vencedoresSemiFinais = new List<Lutador>();
+
+            if (lutadores.Count < 4 || lutadores.Count > 4)
+            {
+                throw new InvalidOperationException("Não há lutadores suficientes para realizar as oitavas de final.");
+            }
+
+            for (int i = 0; i < 2; i++) 
+            {
+                var lutadorMaisJovem = lutadoresPorIdade[i * 2];
+                var segundoLutadorMaisJovem = lutadoresPorIdade[i * 2 + 1];
+
+                var vencedor = await Disputa(lutadorMaisJovem, segundoLutadorMaisJovem);
+
+                vencedoresSemiFinais.Add(vencedor);
+            }
+
+            return vencedoresSemiFinais;
+        }
+
+        public async Task<Lutador> Final() 
+        {
+            var lutadores = await SemiFinal();
+
+            if (lutadores.Count < 2 || lutadores.Count > 2)
+            {
+                throw new InvalidOperationException("Não há lutadores suficientes para realizar as oitavas de final.");
+            }
+
+            Lutador lutador1 = lutadores[0];
+            Lutador lutador2 = lutadores[1];
+
+            var campeao = await Disputa(lutador1, lutador2);
+            return campeao;
+        }
     }
 }
