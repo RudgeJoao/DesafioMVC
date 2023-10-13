@@ -8,6 +8,10 @@ namespace Torneio.Services
     {
         private readonly ILutadorService _lutadorService;
 
+        public TorneioService()
+        {
+        }
+
         public TorneioService(ILutadorService lutadorService) 
         {
             _lutadorService = lutadorService;
@@ -21,10 +25,49 @@ namespace Torneio.Services
             return porcentagem;
         }
 
-        public async Task<Lutador> Disputa(double porcentagemLutador1, double porcentagemLutador2) 
+        public async Task<Lutador> Disputa(Lutador Lutador1, Lutador Lutador2) 
         {
             Lutador? vencedor = null;
-            if (porcentagemLutador1 > porcentagemLutador2) { vencendor = porcentagemLutador1}
+            double porcentagemLutador1 = await CalcularPorcentagem(Lutador1.Vitorias, Lutador1.TotalLutas);
+            double porcentagemLutador2 = await CalcularPorcentagem(Lutador2.Vitorias, Lutador2.TotalLutas);
+
+            if (porcentagemLutador1 > porcentagemLutador2)
+            {
+                vencedor = Lutador1;
+            }
+
+            else if (porcentagemLutador2 > porcentagemLutador1)
+            {
+                vencedor = Lutador2;
+            }
+
+            else 
+            {
+                if (Lutador1.ArtesMarciais > Lutador2.ArtesMarciais)
+                {
+                    vencedor = Lutador1;
+                }
+
+                else if (Lutador2.ArtesMarciais > Lutador1.ArtesMarciais)
+                {
+                    vencedor = Lutador2;
+                }
+
+                else 
+                {
+                    if (Lutador1.TotalLutas > Lutador2.TotalLutas)
+                    {
+                        vencedor = Lutador1;
+                    }
+
+                    else if (Lutador2.TotalLutas > Lutador1.TotalLutas)
+                    {
+                        vencedor = Lutador2;
+                    }
+                }
+            }
+
+            return vencedor;
         }
 
 
@@ -44,22 +87,10 @@ namespace Torneio.Services
             {
                 var lutadorMaisJovem = lutadoresPorIdade[i * 2];
                 var segundoLutadorMaisJovem = lutadoresPorIdade[i * 2 + 1];
-                Lutador? vencedor = null;
-                double porcentagemLutadorJovem = await CalcularPorcentagem(lutadorMaisJovem.Vitorias, segundoLutadorMaisJovem.TotalLutas); 
-                double porcentagemLutadorVelho = await CalcularPorcentagem(segundoLutadorMaisJovem.Vitorias, segundoLutadorMaisJovem.TotalLutas);
 
+                var vencedor = await Disputa(lutadorMaisJovem,segundoLutadorMaisJovem);
 
-                if (porcentagemLutadorJovem > porcentagemLutadorVelho)
-                {
-                    vencedor = lutadorMaisJovem;
-                }
-
-                else if (porcentagemLutadorVelho > porcentagemLutadorJovem)
-                {
-                    vencedor = segundoLutadorMaisJovem;
-                }
-
-                    vencedoresOitavas.Add(vencedor);
+                vencedoresOitavas.Add(vencedor);
 
             }
 
@@ -69,7 +100,26 @@ namespace Torneio.Services
 
         public async Task<List<Lutador>> QuartasDeFinal()
         {
-            return null;
+            var lutadores = await OitavasDeFinal();
+            var lutadoresPorIdade = lutadores.OrderBy(x => x.Idade).ToList();
+            var vencedoresQuartas = new List<Lutador>();
+
+            if (lutadores.Count < 8 || lutadores.Count > 8)
+            {
+                throw new InvalidOperationException("Não há lutadores suficientes para realizar as oitavas de final.");
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                var lutadorMaisJovem = lutadoresPorIdade[i * 2];
+                var segundoLutadorMaisJovem = lutadoresPorIdade[i * 2 + 1];
+
+                var vencedor = await Disputa(lutadorMaisJovem,segundoLutadorMaisJovem);
+
+                vencedoresQuartas.Add(vencedor);
+            }
+
+            return vencedoresQuartas;
         }
     }
 }
