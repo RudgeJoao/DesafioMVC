@@ -1,4 +1,6 @@
-﻿using Torneio.Models;
+﻿using MessagePack.Formatters;
+using System.ComponentModel;
+using Torneio.Models;
 
 namespace Torneio.Services
 {
@@ -10,6 +12,22 @@ namespace Torneio.Services
         {
             _lutadorService = lutadorService;
         }
+
+
+        public async Task<double> CalcularPorcentagem(double parte , double todo) 
+        {
+            double porcentagem = (parte/todo) * 100;
+
+            return porcentagem;
+        }
+
+        public async Task<Lutador> Disputa(double porcentagemLutador1, double porcentagemLutador2) 
+        {
+            Lutador? vencedor = null;
+            if (porcentagemLutador1 > porcentagemLutador2) { vencendor = porcentagemLutador1}
+        }
+
+
 
         public async Task<List<Lutador>> OitavasDeFinal() 
         {
@@ -27,8 +45,8 @@ namespace Torneio.Services
                 var lutadorMaisJovem = lutadoresPorIdade[i * 2];
                 var segundoLutadorMaisJovem = lutadoresPorIdade[i * 2 + 1];
                 Lutador? vencedor = null;
-                double porcentagemLutadorJovem = ((double)lutadorMaisJovem.Vitorias / lutadorMaisJovem.TotalLutas) * 100;
-                double porcentagemLutadorVelho = ((double)segundoLutadorMaisJovem.Vitorias/segundoLutadorMaisJovem.TotalLutas) * 100;
+                double porcentagemLutadorJovem = await CalcularPorcentagem(lutadorMaisJovem.Vitorias, segundoLutadorMaisJovem.TotalLutas); 
+                double porcentagemLutadorVelho = await CalcularPorcentagem(segundoLutadorMaisJovem.Vitorias, segundoLutadorMaisJovem.TotalLutas);
 
 
                 if (porcentagemLutadorJovem > porcentagemLutadorVelho)
