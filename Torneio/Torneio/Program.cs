@@ -24,6 +24,8 @@ builder.Services.AddDbContext<DbContext, OracleDbContext>(opt =>
 
 builder.Services.AddScoped<ILutadorRepository, LutadorRepository>();
 builder.Services.AddScoped<ILutadorService, LutadorService>();
+builder.Services.AddScoped<ITorneioRepository, TorneioRepository>();
+builder.Services.AddScoped<ITorneioService, TorneioService>();
 
 var app = builder.Build();
 
