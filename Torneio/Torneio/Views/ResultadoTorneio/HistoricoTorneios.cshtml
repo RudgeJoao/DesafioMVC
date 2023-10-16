@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Torneio.Models.ResultadoTorneio>
+
+@{
+    ViewData["Title"] = "HistoricoTorneios";
+}
+
+<h1>HistoricoTorneios</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                Data da luta: @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                Id do torneio:@Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                Id do vencedor:@Html.DisplayFor(modelItem => item.Vencedor.Id)
+            </td>
+                <td>
+                    Nome do vencedor:@Html.DisplayFor(modelItem => item.Vencedor.Nome)
+                </td>
+
+        </tr>
+}
+    </tbody>
+</table>
