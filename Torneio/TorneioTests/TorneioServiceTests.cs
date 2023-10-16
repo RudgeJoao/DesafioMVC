@@ -59,14 +59,14 @@ namespace TorneioTests
             // Assert
             var esperado = new List<Lutador>
             {
-                new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 100, Derrotas = 6, Vitorias = 80 },
-                new Lutador { Id = 5, Nome = "Lutador 5", Idade = 3, ArtesMarciais = 3, TotalLutas = 100, Derrotas = 3, Vitorias = 60 },
-                new Lutador { Id = 11, Nome = "Lutador 11", Idade = 6, ArtesMarciais = 2, TotalLutas = 100, Derrotas = 5, Vitorias = 50 },
-                new Lutador { Id = 13, Nome = "Lutador 13", Idade = 7, ArtesMarciais = 4, TotalLutas = 100, Derrotas = 4, Vitorias = 40 },
-                new Lutador { Id = 14, Nome = "Lutador 14", Idade = 10, ArtesMarciais = 3, TotalLutas = 100, Derrotas = 2, Vitorias = 40 },
-                new Lutador { Id = 12, Nome = "Lutador 12", Idade = 11, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 3, Vitorias = 40 },
-                new Lutador { Id = 6, Nome = "Lutador 6", Idade = 14, ArtesMarciais = 4, TotalLutas = 100, Derrotas = 5, Vitorias = 60 },
-                new Lutador { Id = 4, Nome = "Lutador 4", Idade = 15, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 2, Vitorias = 60 }
+                new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 101, Derrotas = 6, Vitorias = 81 },
+                new Lutador { Id = 5, Nome = "Lutador 5", Idade = 3, ArtesMarciais = 3, TotalLutas = 101, Derrotas = 3, Vitorias = 61 },
+                new Lutador { Id = 11, Nome = "Lutador 11", Idade = 6, ArtesMarciais = 2, TotalLutas = 101, Derrotas = 5, Vitorias = 51 },
+                new Lutador { Id = 13, Nome = "Lutador 13", Idade = 7, ArtesMarciais = 4, TotalLutas = 101, Derrotas = 4, Vitorias = 41 },
+                new Lutador { Id = 14, Nome = "Lutador 14", Idade = 10, ArtesMarciais = 3, TotalLutas = 101, Derrotas = 2, Vitorias = 41 },
+                new Lutador { Id = 12, Nome = "Lutador 12", Idade = 11, ArtesMarciais = 5, TotalLutas = 101, Derrotas = 3, Vitorias = 41 },
+                new Lutador { Id = 6, Nome = "Lutador 6", Idade = 14, ArtesMarciais = 4, TotalLutas = 101, Derrotas = 5, Vitorias = 61 },
+                new Lutador { Id = 4, Nome = "Lutador 4", Idade = 15, ArtesMarciais = 5, TotalLutas = 101, Derrotas = 2, Vitorias = 61 }
             };
 
             Assert.NotNull(result);
@@ -114,10 +114,10 @@ namespace TorneioTests
 
             var esperado = new List<Lutador>
             {
-                new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 100, Derrotas = 6, Vitorias = 80 },
-                new Lutador { Id = 11, Nome = "Lutador 11", Idade = 6, ArtesMarciais = 2, TotalLutas = 100, Derrotas = 5, Vitorias = 50 },
-                new Lutador { Id = 12, Nome = "Lutador 12", Idade = 11, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 3, Vitorias = 40 },
-                new Lutador { Id = 4, Nome = "Lutador 4", Idade = 15, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 2, Vitorias = 60 }
+                new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 102, Derrotas = 6, Vitorias = 82 },
+                new Lutador { Id = 11, Nome = "Lutador 11", Idade = 6, ArtesMarciais = 2, TotalLutas = 102, Derrotas = 5, Vitorias = 52 },
+                new Lutador { Id = 12, Nome = "Lutador 12", Idade = 11, ArtesMarciais = 5, TotalLutas = 102, Derrotas = 3, Vitorias = 42 },
+                new Lutador { Id = 4, Nome = "Lutador 4", Idade = 15, ArtesMarciais = 5, TotalLutas = 102, Derrotas = 2, Vitorias = 62 }
             };
             Assert.Equal(4,result.Count);
             Assert.Equivalent(esperado, result);
@@ -160,8 +160,8 @@ namespace TorneioTests
 
             var esperado = new List<Lutador>
             {
-                new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 100, Derrotas = 6, Vitorias = 80 },
-                new Lutador { Id = 4, Nome = "Lutador 4", Idade = 15, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 2, Vitorias = 60 }
+                new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 103, Derrotas = 6, Vitorias = 83 },
+                new Lutador { Id = 4, Nome = "Lutador 4", Idade = 15, ArtesMarciais = 5, TotalLutas = 103, Derrotas = 2, Vitorias = 63 }
             };
             Assert.Equivalent(esperado, result);
         }
@@ -201,7 +201,7 @@ namespace TorneioTests
             // Assert
 
 
-            var esperado = new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 100, Derrotas = 6, Vitorias = 80 };
+            var esperado = new Lutador { Id = 3, Nome = "Lutador 3", Idade = 2, ArtesMarciais = 2, TotalLutas = 104, Derrotas = 6, Vitorias = 84 };
             Assert.Equivalent(esperado, result);
         }
 

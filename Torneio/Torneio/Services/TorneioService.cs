@@ -25,44 +25,80 @@ namespace Torneio.Services
             return porcentagem;
         }
 
-        public async Task<Lutador> Disputa(Lutador Lutador1, Lutador Lutador2) 
+        public async Task<Lutador> Disputa(Lutador lutador1, Lutador lutador2) // TODO atualizar vitorias e derrotas depois de cada disputa
         {
             Lutador? vencedor = null;
-            double porcentagemLutador1 = await CalcularPorcentagem(Lutador1.Vitorias, Lutador1.TotalLutas);
-            double porcentagemLutador2 = await CalcularPorcentagem(Lutador2.Vitorias, Lutador2.TotalLutas);
+            double porcentagemLutador1 = await CalcularPorcentagem(lutador1.Vitorias, lutador1.TotalLutas);
+            double porcentagemLutador2 = await CalcularPorcentagem(lutador2.Vitorias, lutador2.TotalLutas);
 
             if (porcentagemLutador1 > porcentagemLutador2)
             {
-                vencedor = Lutador1;
+                lutador1.Vitorias++;
+                lutador1.TotalLutas++;
+
+                lutador2.Derrotas++;
+                lutador2.TotalLutas++;
+
+                vencedor = lutador1;
             }
 
             else if (porcentagemLutador2 > porcentagemLutador1)
             {
-                vencedor = Lutador2;
+                lutador1.Derrotas++;
+                lutador1.TotalLutas++;
+
+                lutador2.Vitorias++;
+                lutador2.TotalLutas++;
+
+                vencedor = lutador2;
             }
 
             else 
             {
-                if (Lutador1.ArtesMarciais > Lutador2.ArtesMarciais)
+                if (lutador1.ArtesMarciais > lutador2.ArtesMarciais)
                 {
-                    vencedor = Lutador1;
+                    lutador1.Vitorias++;
+                    lutador1.TotalLutas++;
+
+                    lutador2.Derrotas++;
+                    lutador2.TotalLutas++;
+
+                    vencedor = lutador1;
                 }
 
-                else if (Lutador2.ArtesMarciais > Lutador1.ArtesMarciais)
+                else if (lutador2.ArtesMarciais > lutador1.ArtesMarciais)
                 {
-                    vencedor = Lutador2;
+                    lutador1.Derrotas++;
+                    lutador1.TotalLutas++;
+
+                    lutador2.Vitorias++;
+                    lutador2.TotalLutas++;
+
+                    vencedor = lutador2;
                 }
 
                 else 
                 {
-                    if (Lutador1.TotalLutas > Lutador2.TotalLutas)
+                    if (lutador1.TotalLutas > lutador2.TotalLutas)
                     {
-                        vencedor = Lutador1;
+                        lutador1.Vitorias++;
+                        lutador1.TotalLutas++;
+
+                        lutador2.Derrotas++;
+                        lutador2.TotalLutas++;
+
+                        vencedor = lutador1;
                     }
 
-                    else if (Lutador2.TotalLutas > Lutador1.TotalLutas)
+                    else if (lutador2.TotalLutas > lutador1.TotalLutas)
                     {
-                        vencedor = Lutador2;
+                        lutador1.Derrotas++;
+                        lutador1.TotalLutas++;
+
+                        lutador2.Vitorias++;
+                        lutador2.TotalLutas++;
+
+                        vencedor = lutador2;
                     }
                 }
             }
@@ -146,7 +182,7 @@ namespace Torneio.Services
             return vencedoresSemiFinais;
         }
 
-        public async Task<Lutador> Final() 
+        public async Task<Lutador> Final() // TODO Salvar campeao do torneio no banco
         {
             var lutadores = await SemiFinal();
 
