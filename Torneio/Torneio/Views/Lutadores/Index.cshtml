@@ -10,7 +10,16 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" type="button" class="btn btn-primary">Create New Lutador</a>
+    @if (Model.Count() < 16)
+    {
+    <p>O Torneio ainda não tem 16 lutadores! Adicione mais, ainda falta @(16 - Model.Count());</p>
+        <a asp-action="Create" type="button" class="btn btn-primary">Create New Lutador</a>
+    }
+    else
+    {
+    <p>Já existem 16 Lutadores, o Torneio ja pode iniciar!</p>
+        <a type="button"class="btn btn-dark" asp-area="" asp-controller="Lutadores" asp-action="PreTorneio">Iniciar Torneio</a>
+    }
 </p>
 <table class="table table-sm">
     <thead>
