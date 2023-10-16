@@ -1,6 +1,7 @@
 ﻿using MessagePack.Formatters;
 using System.ComponentModel;
 using Torneio.Models;
+using Torneio.Repositories;
 
 namespace Torneio.Services
 {
@@ -17,7 +18,6 @@ namespace Torneio.Services
             _lutadorService = lutadorService;
         }
 
-
         public async Task<double> CalcularPorcentagem(double parte , double todo) 
         {
             double porcentagem = (parte/todo) * 100;
@@ -25,7 +25,7 @@ namespace Torneio.Services
             return porcentagem;
         }
 
-        public async Task<Lutador> Disputa(Lutador lutador1, Lutador lutador2) // TODO atualizar vitorias e derrotas depois de cada disputa
+        public async Task<Lutador> Disputa(Lutador lutador1, Lutador lutador2)
         {
             Lutador? vencedor = null;
             double porcentagemLutador1 = await CalcularPorcentagem(lutador1.Vitorias, lutador1.TotalLutas);
@@ -194,8 +194,15 @@ namespace Torneio.Services
             Lutador lutador1 = lutadores[0];
             Lutador lutador2 = lutadores[1];
 
-            var campeao = await Disputa(lutador1, lutador2);
-            return campeao;
+            var vencedor = await Disputa(lutador1, lutador2);
+            return vencedor;
+        }
+
+        public async Task<ResultadoTorneio> ResultadoTorneio() 
+        {
+            var campeao = await Final();
+            var resultado = await _lutadorService.SaveResultadoTorneio(campeao);
+            return resultado;
         }
     }
 }

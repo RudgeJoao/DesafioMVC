@@ -8,10 +8,12 @@ namespace Torneio.Services
     public class LutadorService : ILutadorService
     {
         private readonly ILutadorRepository _lutadorRepository;
+        private readonly ITorneioRepository _torneioRepository;
 
-        public LutadorService(ILutadorRepository lutadorRepository)
+        public LutadorService(ILutadorRepository lutadorRepository, ITorneioRepository torneioRepository)
         {
             _lutadorRepository = lutadorRepository;
+            _torneioRepository = torneioRepository;
         }
         public async Task<List<Lutador>> GetLutadoresAsync()
         {
@@ -41,17 +43,17 @@ namespace Torneio.Services
 
         public async Task CreateLutador(Lutador lutador)
         {
-            _lutadorRepository.CreateLutador(lutador);
+            await _lutadorRepository.CreateLutador(lutador);
         }
 
         public async Task UpdateLutador(int id, Lutador lutador)
         {
-            _lutadorRepository.UpdateLutador(id, lutador);
+            await _lutadorRepository.UpdateLutador(id, lutador);
         }
 
         public async Task DeleteLutador(int id)
         { 
-            _lutadorRepository.DeleteLutador(id);
+            await _lutadorRepository.DeleteLutador(id);
         }
         public bool LutadorExists(int id)
         { 
@@ -60,5 +62,15 @@ namespace Torneio.Services
             return existe;
         }
 
+        public async Task<ResultadoTorneio>SaveResultadoTorneio(Lutador lutador) 
+        {
+            var torneio = new ResultadoTorneio();
+
+            torneio.Data = DateTime.Now;
+            torneio.Vencedor = lutador;
+            await _torneioRepository.CreateTorneio(torneio);
+
+            return torneio;
+        }
     }
 }
