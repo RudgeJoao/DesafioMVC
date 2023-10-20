@@ -62,5 +62,15 @@ namespace Torneio.Services
             return existe;
         }
 
+        public async Task<ResultadoTorneio>SaveResultadoTorneio(Lutador lutador) 
+        {
+            var torneio = new ResultadoTorneio();
+
+            torneio.Data = DateTime.Now;
+            torneio.Vencedor = lutador;
+            await _torneioRepository.CreateTorneio(torneio);
+
+            return torneio;
+        }
     }
 }

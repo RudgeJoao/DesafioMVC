@@ -8,16 +8,14 @@ namespace Torneio.Services
     public class TorneioService : ITorneioService
     {
         private readonly ILutadorService _lutadorService;
-        private readonly ITorneioRepository _torneioRepository;
 
         public TorneioService()
         {
         }
 
-        public TorneioService(ILutadorService lutadorService, ITorneioRepository repository)
+        public TorneioService(ILutadorService lutadorService) 
         {
             _lutadorService = lutadorService;
-            _torneioRepository = repository;
         }
 
         public async Task<double> CalcularPorcentagem(double parte , double todo) 
@@ -203,20 +201,8 @@ namespace Torneio.Services
         public async Task<ResultadoTorneio> ResultadoTorneio() 
         {
             var campeao = await Final();
-            var resultado = await SaveResultadoTorneio(campeao);
+            var resultado = await _lutadorService.SaveResultadoTorneio(campeao);
             return resultado;
-        }
-
-
-        public async Task<ResultadoTorneio> SaveResultadoTorneio(Lutador lutador)
-        {
-            var torneio = new ResultadoTorneio();
-
-            torneio.Data = DateTime.Now;
-            torneio.Vencedor = lutador;
-            await _torneioRepository.CreateTorneio(torneio);
-
-            return torneio;
         }
     }
 }
