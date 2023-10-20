@@ -15,7 +15,5 @@ namespace Torneio.Services
 
         bool LutadorExists(int id);
 
-        Task<ResultadoTorneio> SaveResultadoTorneio(Lutador lutador);
-
     }
 }
