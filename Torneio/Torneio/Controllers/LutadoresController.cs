@@ -42,9 +42,9 @@ namespace Torneio.Controllers
         }
 
         // GET: Lutadores/Create
-        public IActionResult Create()
+        public IActionResult ViewCreate()
         {
-            return View();
+            return View("Views/Lutadores/Create.cshtml");
         }
 
         // POST: Lutadores/Create

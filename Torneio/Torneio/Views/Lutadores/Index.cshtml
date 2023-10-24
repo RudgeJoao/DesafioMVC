@@ -13,7 +13,7 @@
     @if (Model.Count() < 16)
     {
     <p>O Torneio ainda não tem 16 lutadores! Adicione mais, ainda falta @(16 - Model.Count());</p>
-        <a asp-action="Create" type="button" class="btn btn-primary">Create New Lutador</a>
+        <a asp-action="ViewCreate" type="button" class="btn btn-primary">Create New Lutador</a>
     }
     else
     {
