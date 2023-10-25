@@ -7,5 +7,7 @@ namespace Torneio.Repositories
         Task<List<ResultadoTorneio>> ListarTorneiosAsync();
         Task<ResultadoTorneio> ListarTorneioAsync(int id);
         Task CreateTorneio(ResultadoTorneio resultadoTorneio);
+        Task<List<Lutador>> ListarLutadoresAsync();
+        Task<ResultadoTorneio> SaveResultadoTorneio(Lutador lutador, double taxaDeVitorias);
     }
 }

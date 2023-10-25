@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Diagnostics;
 using Torneio.Data;
 using Torneio.Repositories;
@@ -22,12 +23,19 @@ builder.Services.AddDbContext<DbContext, OracleDbContext>(opt =>
 
 });
 
+
 builder.Services.AddScoped<ILutadorRepository, LutadorRepository>();
 builder.Services.AddScoped<ILutadorService, LutadorService>();
 builder.Services.AddScoped<ITorneioRepository, TorneioRepository>();
 builder.Services.AddScoped<ITorneioService, TorneioService>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<OracleDbContext>();
+    dataContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
