@@ -3,6 +3,66 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bem vindo</h1>
+    <h2>Torneio de lutas em C#, usando CRUD para a criação dos lutadores e fazendo uma lógica de oitavas de final onde: </h2>
 </div>
+
+<h2>🥋 Torneio de luta 🥊</h2>
+<p>O torneio consiste em uma disputa entre 16 lutadores para que seja possível identificar quem é o vencedor com base nas regras definidas.</p>
+
+<h3>🌱 Início 🌱</h3>
+<p>O torneio inicia com 16 lutadores, sendo que o torneio é somente mata mata e a ordenação das lutas deve ser por idade dos lutadores, do menor para o maior.</p>
+
+<h3>🏹 Oitavas de final 🛡️</h3>
+<p>Cada luta das oitavas deve ser realizada da seguinte forma: o lutador mais jovem contra o segundo mais jovem e assim sucessivamente.</p>
+
+<h3>⚔️ Quartas de final ⚔️</h3>
+<p>O critério das quartas deve seguir o mesmo das oitavas.</p>
+
+<h3>🏅 Semifinal 🏅</h3>
+<p>Cada semifinal é realizada entre os vencedores de cada uma das quartas de final, sendo assim o vencedor da luta 1 contra o vencedor da luta 2 e o vencedor da luta 3 contra o vencedor da luta 4.</p>
+
+<h3>🥇 Final 🥈</h3>
+<p>A final é disputada pelos vencedores das semifinais.</p>
+
+<h3>🏆 Critério de vitória 🏆</h3>
+<p>
+    O vencedor é determinado pela maior porcentagem de vitórias, sendo que só é necessário a avaliação do número inteiro, não decimal.<br>
+    O cálculo para identificar a porcentagem é: vitórias / total de lutas * 100. Caso haja empate deve ser considerado o critério de desempate.
+</p>
+
+<h3>⚠️ Critérios de desempate ⚠️</h3>
+<p>
+    O primeiro critério será pela quantidade de artes marciais que o lutador possui, ou seja, o lutador com maior número é o vencedor.<br>
+    Caso a quantidade de artes marciais não seja o suficiente, o segundo critério deve ser pelo número de lutas, sendo assim o lutador com o maior número de lutas é o vencedor.
+</p>
+
+<h2>💻 Informações técnicas 💻</h2>
+<p>Os dados dos lutadores são:</p>
+<ul>
+    <li>Identificação</li>
+    <li>Nome</li>
+    <li>Idade</li>
+    <li>Artes marciais</li>
+    <li>Total de lutas</li>
+    <li>Derrotas</li>
+    <li>Vitórias</li>
+</ul>
+<p>
+    Em sua solução será necessário criar uma tela para selecionar 16 lutadores, nesta tela os dados dos lutadores apresentados deverão ser: nome, idade, total de lutas, derrotas, vitórias e quantidade de artes marciais.<br>
+    Ainda nesta tela, deve haver um botão para o início do torneio, sendo que o torneio só pode iniciar com 16 lutadores.<br>
+    Após realizar o torneio, deve haver uma tela com o resultado, apresentando somente o vencedor.<br>
+    Você poderá utilizar o exemplo abaixo como guia ou montar as telas de sua preferência.
+</p>
+
+<h3>💾 Armazenamento 💾</h3>
+<p>
+    Você deverá criar um banco de dados para armazenar as informações dos lutadores e os resultados do torneio.<br>
+    Tanto as vitórias quanto as derrotas de cada luta dos lutadores devem ser atualizadas no banco de dados.
+</p>
+
+<h3>📦 Entrega 📦</h3>
+<p>
+    O prazo para entrega é de duas semanas. Ao finalizar, por favor, chame alguém do time de arquitetura.<br>
+    Lembrando que ao finalizar, você terá que apresentar sua solução explicando o que foi feito.
+</p>
