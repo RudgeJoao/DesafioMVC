@@ -7,16 +7,17 @@ namespace Torneio.Services
 {
     public class TorneioService : ITorneioService
     {
-        private readonly ILutadorService _lutadorService;
+        private readonly ITorneioRepository _torneioRepository;
+
+        public TorneioService(ITorneioRepository torneioRepository) 
+        {
+            _torneioRepository = torneioRepository;
+        }
 
         public TorneioService()
         {
         }
 
-        public TorneioService(ILutadorService lutadorService) 
-        {
-            _lutadorService = lutadorService;
-        }
 
         public async Task<double> CalcularPorcentagem(double parte , double todo) 
         {
@@ -106,11 +107,15 @@ namespace Torneio.Services
             return vencedor;
         }
 
-
+        public async Task<List<Lutador>> ListarLutadores() 
+        {
+            var lutadores = await _torneioRepository.ListarLutadoresAsync();
+            return lutadores;
+        }
 
         public async Task<List<Lutador>> OitavasDeFinal() 
         {
-            var lutadores = await _lutadorService.GetLutadoresAsync();
+            var lutadores = await ListarLutadores();
             var lutadoresPorIdade = lutadores.OrderBy(x => x.Idade).ToList();
             var vencedoresOitavas = new List<Lutador>();
 
@@ -201,7 +206,9 @@ namespace Torneio.Services
         public async Task<ResultadoTorneio> ResultadoTorneio() 
         {
             var campeao = await Final();
-            var resultado = await _lutadorService.SaveResultadoTorneio(campeao);
+            var taxaDeVitorias = await CalcularPorcentagem(campeao.Vitorias, campeao.TotalLutas);
+            var resultado = await _torneioRepository.SaveResultadoTorneio(campeao,taxaDeVitorias);
+
             return resultado;
         }
     }

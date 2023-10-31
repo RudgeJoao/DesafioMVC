@@ -14,5 +14,6 @@ namespace Torneio.Services
         Task<Lutador> Disputa(Lutador Lutador1, Lutador Lutador2);
 
         Task<ResultadoTorneio> ResultadoTorneio();
+        Task<List<Lutador>> ListarLutadores();
     }
 }

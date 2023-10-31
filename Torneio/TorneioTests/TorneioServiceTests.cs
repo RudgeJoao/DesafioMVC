@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.Reflection.Metadata.Ecma335;
 using Torneio.Controllers;
 using Torneio.Models;
+using Torneio.Repositories;
 using Torneio.Services;
 
 namespace TorneioTests
@@ -47,10 +48,10 @@ namespace TorneioTests
                 new Lutador { Id = 16, Nome = "Lutador 16", Idade = 9, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 1, Vitorias = 4 }
             };
 
-            var lutadorService = new Mock<ILutadorService>();
-            lutadorService.Setup(s => s.GetLutadoresAsync()).ReturnsAsync(lutadores);
+            var mock = new Mock<ITorneioRepository>();
+            mock.Setup(s => s.ListarLutadoresAsync()).ReturnsAsync(lutadores);
 
-            var torneioService = new TorneioService(lutadorService.Object);
+            var torneioService = new TorneioService(mock.Object);
             // Act
 
             var vencedoresOitavas = torneioService.OitavasDeFinal();
@@ -101,10 +102,10 @@ namespace TorneioTests
                 new Lutador { Id = 16, Nome = "Lutador 16", Idade = 9, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 1, Vitorias = 4 }
             };
 
-            var lutadorService = new Mock<ILutadorService>();
-            lutadorService.Setup(s => s.GetLutadoresAsync()).ReturnsAsync(lutadores);
+            var mock = new Mock<ITorneioRepository>();
+            mock.Setup(s => s.ListarLutadoresAsync()).ReturnsAsync(lutadores);
 
-            var torneioService = new TorneioService(lutadorService.Object);
+            var torneioService = new TorneioService(mock.Object);
 
             // Act
             var vencedoresQuartas = torneioService.QuartasDeFinal();
@@ -147,10 +148,10 @@ namespace TorneioTests
                 new Lutador { Id = 16, Nome = "Lutador 16", Idade = 9, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 1, Vitorias = 4 }
             };
 
-            var lutadorService = new Mock<ILutadorService>();
-            lutadorService.Setup(s => s.GetLutadoresAsync()).ReturnsAsync(lutadores);
+            var mock = new Mock<ITorneioRepository>();
+            mock.Setup(s => s.ListarLutadoresAsync()).ReturnsAsync(lutadores);
 
-            var torneioService = new TorneioService(lutadorService.Object);
+            var torneioService = new TorneioService(mock.Object);
 
             // Act
             var finalistas = torneioService.SemiFinal();
@@ -190,10 +191,10 @@ namespace TorneioTests
                 new Lutador { Id = 16, Nome = "Lutador 16", Idade = 9, ArtesMarciais = 5, TotalLutas = 100, Derrotas = 1, Vitorias = 4 }
             };
 
-            var lutadorService = new Mock<ILutadorService>();
-            lutadorService.Setup(s => s.GetLutadoresAsync()).ReturnsAsync(lutadores);
+            var mock = new Mock<ITorneioRepository>();
+            mock.Setup(s => s.ListarLutadoresAsync()).ReturnsAsync(lutadores);
 
-            var torneioService = new TorneioService(lutadorService.Object);
+            var torneioService = new TorneioService(mock.Object);
 
             // Act
             var campeao = torneioService.Final();
