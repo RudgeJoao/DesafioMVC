@@ -4,11 +4,8 @@
     ViewData["Title"] = "HistoricoTorneios";
 }
 
-<h1>HistoricoTorneios</h1>
+<h1>Historico Torneios</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -31,9 +28,8 @@
                 Nome do vencedor:@Html.DisplayFor(modelItem => item.Vencedor)
             </td>
                 <td>
-                    Taxa de vitorias:@Html.DisplayFor(modelItem => item.Vencedor)
+                    Taxa de vitorias:@Html.DisplayFor(modelItem => item.TaxaDeVitorias)
                 </td>
-
         </tr>
 }
     </tbody>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
 using Torneio.Data;
 using Torneio.Models;
 
@@ -37,7 +36,7 @@ namespace Torneio.Repositories
         {
             var torneio = new ResultadoTorneio();
 
-            torneio.Data = DateTime.Today;
+            torneio.Data = DateTime.Now;
             torneio.Vencedor = lutador.Nome;
             torneio.TaxaDeVitorias = taxaDeVitorias;
 
