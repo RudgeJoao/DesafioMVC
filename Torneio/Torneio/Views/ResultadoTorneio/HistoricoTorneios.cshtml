@@ -10,13 +10,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Data)
+                Torneios:
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderBy(x => x.Id)) {
         <tr>
             <td>
                 Data da luta: @Html.DisplayFor(modelItem => item.Data)
