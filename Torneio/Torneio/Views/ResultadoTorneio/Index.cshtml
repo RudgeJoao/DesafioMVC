@@ -1,0 +1,16 @@
+﻿@model Torneio.Models.ResultadoTorneio;
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/Torneio.styles.css" asp-append-version="true" />
+
+<h1>TORNEIO</h1>
+
+
+    <p>Taxa de vitorias: @Html.DisplayFor(model => model.TaxaDeVitorias)</p>
+    <p>Nome Vencedor: @Html.DisplayFor(model => model.Vencedor)</p>
+    <p>Data: @Html.DisplayFor(model => model.Data)</p>
+    <p>ID do torneio: @Html.DisplayFor(model => model.Id)</p>

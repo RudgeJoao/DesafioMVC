@@ -16,3 +16,30 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.cards-lutador {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card-lutador {
+    flex-basis: calc(25% - 1rem);
+}
+
+.background-color-container {
+    background-color: #3e5c76;
+}
+.background-color-light-blue {
+    background-color: #748cab;
+}
+
+.btn-iniciar-torneio {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.text-white {
+    color: white;
+}

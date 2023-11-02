@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Torneio.Models.Lutador>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Estes são os participantes do Torneio!</h1>
+
+
+<div class="cards-lutador">
+@foreach (var item in Model)
+{   
+        <div class="card text-bg-dark mb-3 card-lutador" style="max-width: 18rem;">
+            <div class="card-header">@Html.DisplayFor(modelItem => item.Nome)</div>
+                <div class="card-body">
+                    <p class="card-text">Idade: @Html.DisplayFor(modelItem => item.Idade)</p>
+                    <p class="card-text">Artes Marciais:  @Html.DisplayFor(modelItem => item.ArtesMarciais)</p>
+                    <p class="card-text">Total de lutas: @Html.DisplayFor(modelItem => item.TotalLutas) </p>
+                    <p class="card-text">Vitorias: @Html.DisplayFor(modelItem => item.Vitorias)</p>
+                    <p class="card-text">Derrotas : @Html.DisplayFor(modelItem => item.Derrotas)</p>
+            </div>
+        </div>
+}
+
+</div>
+<div class="btn-iniciar-torneio"><a type="button" class="btn btn-dark" asp-area="" asp-controller="ResultadoTorneio" asp-action="Index">COMEÇAR TORNEIO</a></div>
+

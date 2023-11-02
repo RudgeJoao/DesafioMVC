@@ -26,6 +26,11 @@ namespace Torneio.Controllers
             var query = await _lutadorService.GetLutadoresAsync();
             return View(query);
         }
+        public async Task<IActionResult> PreTorneio()
+        {
+            var query = await _lutadorService.GetLutadoresAsync();
+            return View(query);
+        }
 
         // GET: Lutadores/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -37,9 +42,9 @@ namespace Torneio.Controllers
         }
 
         // GET: Lutadores/Create
-        public IActionResult Create()
+        public IActionResult ViewCreate()
         {
-            return View();
+            return View("Views/Lutadores/Create.cshtml");
         }
 
         // POST: Lutadores/Create
