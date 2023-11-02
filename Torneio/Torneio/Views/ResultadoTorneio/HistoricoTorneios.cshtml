@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Torneio.Models.ResultadoTorneio>
+
+@{
+    ViewData["Title"] = "HistoricoTorneios";
+}
+
+<h1>Historico Torneios</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Torneios:
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderBy(x => x.Id)) {
+        <tr>
+            <td>
+                Data da luta: @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                Id do torneio:@Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                Nome do vencedor:@Html.DisplayFor(modelItem => item.Vencedor)
+            </td>
+                <td>
+                    Taxa de vitorias:@Html.DisplayFor(modelItem => item.TaxaDeVitorias)
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
